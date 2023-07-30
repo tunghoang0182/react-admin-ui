@@ -11,6 +11,7 @@ import { barChartBoxVisit } from "../../data"
 import { barChartBoxRevenue } from "../../data"
 import BarChartBox from "../../components/barChartBox/BarChartBox"
 
+
 const Home = () => {
     return (
         <div className="home">

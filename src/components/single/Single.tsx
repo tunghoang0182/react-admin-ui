@@ -7,7 +7,7 @@ import {
     XAxis,
     YAxis,
   } from "recharts";
-  import "./single.scss";
+import "./single.scss";
   
   type Props = {
     id: number;

@@ -1,4 +1,6 @@
 @import "./variables.scss";
+@import "./responsive.scss";
+
 
 * {
   margin: 0;
@@ -20,6 +22,8 @@ a {
 
 .container {
   display: flex;
+
+ 
 }
 
 .menuContainer {
@@ -27,6 +31,11 @@ a {
   padding: 5px 20px;
   // border-right: 2px solid $soft-bg;
   border-right: 2px solid white;
+
+  @include lg{
+    width: max-content;
+  }
+
 }
 
 .contentContainer {
