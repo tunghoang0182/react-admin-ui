@@ -9,7 +9,7 @@ interface AuthContextProps {
   user: User;
   login: (username: string, password: string) => Promise<string>;
   logout: () => void;
-}
+} 
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 

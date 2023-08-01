@@ -8,6 +8,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/login/Register";
 import User from "./pages/user/User";
 import Product from "./pages/product/Product";
+import Calendar from "./pages/Calendar/Calendar";
 import "./styles/global.scss"
 import {
   createBrowserRouter,
@@ -67,6 +68,10 @@ function App() {
             {
               path: "/products/:id",
               element: <Product />,
+            },
+            {
+              path: "/calendar",
+              element: <Calendar />,
             },
           ],
         },

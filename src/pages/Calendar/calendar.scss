@@ -1,0 +1,87 @@
+@import 'react-big-calendar/lib/css/react-big-calendar.css';
+@import "../../styles/variables.scss";
+@import "../../styles/responsive.scss";
+
+
+
+
+.rbc-month-view .rbc-off-range-bg {
+  background: linear-gradient(to bottom, #f9445f, #f9445f00);
+}
+
+.rbc-month-view .rbc-today {
+  background: #ef9fab;
+}
+
+.rbc-time-view .rbc-today{
+  background: #ef9fab;
+}
+
+
+.rbc-toolbar .rbc-toolbar-label,
+.rbc-toolbar .rbc-btn-group button {
+  color: white;
+}
+
+
+
+.my-modal-class {
+  z-index: 9999;
+  width: 30%; /* Adjust as needed */
+  height: 50%; /* Adjust as needed */
+  margin: auto; /* Center the modal */
+  overflow: auto; /* Add a scrollbar if the content is too large */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.my-modal-overlay {
+  display: flex;
+  align-items: center;  
+  justify-content: center;  
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Align items horizontally in the center */
+  background-image: linear-gradient(79deg, #7439db, #C66FBC 48%,  #F7944D);
+  padding: 20px;
+  border-radius: 10px; /* Add rounded corners to your modal */
+  color: white;
+}
+
+.modal-button{
+  border: none;
+  background-color: white;
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  color:#074beb;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Add color transition */
+  margin-bottom: 5px; 
+}
+
+
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+
+.event-form input[type="text"] {
+  width: 100%; /* Make the title input full width */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.my-modal-class:focus {
+  outline: none; /* Removes the default browser outline */
+  box-shadow: none; /* Removes the default browser shadow */
+}
