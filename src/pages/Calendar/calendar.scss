@@ -23,12 +23,24 @@
   color: white;
 }
 
+.rbc-event{
+  background-color: #e62ad0;
+}
+.rbc-event.rbc-selected{
+  background-color: #e62ad0;
+}
+
+
+.rbc-show-more{
+  color: white;
+  background-color: transparent;
+}
 
 
 .my-modal-class {
   z-index: 9999;
   width: 30%; /* Adjust as needed */
-  height: 50%; /* Adjust as needed */
+  height: 60%; /* Adjust as needed */
   margin: auto; /* Center the modal */
   overflow: auto; /* Add a scrollbar if the content is too large */
   position: absolute;
@@ -84,4 +96,11 @@
 .my-modal-class:focus {
   outline: none; /* Removes the default browser outline */
   box-shadow: none; /* Removes the default browser shadow */
+}
+
+
+.modal-input {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 5px;
 }
