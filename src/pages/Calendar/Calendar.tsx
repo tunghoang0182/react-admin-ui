@@ -1,5 +1,5 @@
 import "./calendar.scss";
-import React, { Fragment,useState,useRef } from 'react';
+import React, { Fragment,useState,useRef, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.scss';
@@ -20,6 +20,7 @@ interface MyEvent {
 
 
 
+
 const localizer = momentLocalizer(moment);
 const DnDCalendar = withDragAndDrop(Calendar);
 
@@ -33,6 +34,59 @@ const MyCalendar: React.FC<CalendarProps> = () => {
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [eventTitle, setEventTitle] = useState("");
   const [selectedEvent, setSelectedEvent] = useState<MyEvent | null>(null);
+
+  const fetchEvents = async () => {
+    const token = localStorage.getItem('token');
+    const response = await fetch('http://127.0.0.1:8000/users/calendars/', {
+        headers: {
+            'Authorization': `Token ${token}`
+        }
+    });
+    const data = await response.json();
+    console.log('Data from API:', data);
+    setEvents(data.map((event: any) => ({
+      ...event,
+      start: new Date(event.start_date), // updated to 'start_date'
+      end: new Date(event.end_date), // updated to 'end_date'
+    })));
+  };
+  
+
+
+  const createEvent = async (event: MyEvent) => {
+    const token = localStorage.getItem('token');
+    
+    // Convert dates to UTC using moment.js
+    const start_date = event.start.toISOString();
+    const end_date = event.end.toISOString();
+
+    
+  
+    const response = await fetch('http://127.0.0.1:8000/users/calendars/create', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Token ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...event,
+        start_date,
+        end_date,
+      }),
+    });
+    const data = await response.json();
+    console.log('Response from API:', data);
+  };
+  
+
+
+
+
+  useEffect(() => {
+    fetchEvents();
+  }, []);
+  
+
   
 
   const handleSelect = ({ start, end }: { start: Date | string, end: Date | string }) => {
@@ -68,23 +122,26 @@ const MyCalendar: React.FC<CalendarProps> = () => {
     setIsOpen(false);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (eventTitle && startDate && endDate) {
-      setEvents([
-        ...events,
-        {
-          start: startDate,
-          end: endDate,
-          title: eventTitle,
-        },
-      ]);
+      const newEvent = {
+        start: startDate,
+        end: endDate,
+        title: eventTitle,
+      };
+      await createEvent(newEvent);
+      await fetchEvents();
+      // Remove the line below
+      // setEvents([...events, {start: startDate, end: endDate, title: eventTitle,}]);
       setEventTitle("");
       setStartDate(null);
       setEndDate(null);
       closeModal();
     }
   };
+  
+  
 
   const updateEvent = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
